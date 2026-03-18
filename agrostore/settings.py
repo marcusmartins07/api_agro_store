@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'agrostore.main',
     'agrostore.usuarios',
+    'agrostore.lojas',
     'agrostore.produtos',
 ]
 
