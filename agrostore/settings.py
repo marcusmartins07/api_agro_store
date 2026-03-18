@@ -87,10 +87,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    # TODO Comentando uso do token para testes
-    #"DEFAULT_PERMISSION_CLASSES": (
-    #    "rest_framework.permissions.IsAuthenticated",
-    #),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
 }
 
 LANGUAGE_CODE = 'en-us'

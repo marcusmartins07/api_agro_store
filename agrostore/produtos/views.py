@@ -1,31 +1,36 @@
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import viewsets, permissions
 from .models import Produto, PrecoProduto, Categoria
 from .serializers import ProdutoSerializer, PrecoProdutoSerializer, CategoriaSerializer
-from agrostore.main.bd_backup import insert_bd
+from agrostore.main import bd_backup
 
 
 class CategoriaViewSet(viewsets.ModelViewSet):
+    queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
 
-    def get_queryset(self):
-        queryset = Categoria.objects.all()
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            # bd_backup.insert_bd() #TODO somente para inserir testes
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
 
-        ativo = self.request.query_params.get("ativo")
-        
-        #insert_bd() #TODO Manipulando insert para tests
-
-        if ativo is not None:
-            queryset = queryset.filter(ativo=ativo.lower() == "true")
-
-        return queryset
 
 class PrecoProdutoViewSet(viewsets.ModelViewSet):
     queryset = PrecoProduto.objects.all()
     serializer_class = PrecoProdutoSerializer
 
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
+
 
 class ProdutoViewSet(viewsets.ModelViewSet):
-    queryset = Produto.objects.select_related('categoria').prefetch_related('precos').all()
+    queryset = Produto.objects.select_related('categoria', 'loja').prefetch_related('precos').all()
     serializer_class = ProdutoSerializer
+    http_method_names = ['get', 'post', 'patch']
+
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]

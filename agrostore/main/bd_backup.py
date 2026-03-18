@@ -145,7 +145,7 @@ def insert_bd():
     insert_generos()
     print('✔ Generos inseridos')
 
-    insert_usuarios()
+"""    insert_usuarios()
     print('✔ Usuarios inseridos')
 
     insert_categorias_produto()
@@ -155,4 +155,4 @@ def insert_bd():
     print('✔ Produtos inseridos')
     
     insert_preco()
-    print('✔ Preços inseridos')
+    print('✔ Preços inseridos')"""

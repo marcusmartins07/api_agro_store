@@ -2,10 +2,11 @@ from django.db import models
 from decimal import Decimal
 from django.utils import timezone
 from agrostore.main.models import BaseModel
+from agrostore.lojas.models import Loja
 
 
 class Categoria(BaseModel):
-    categoria_id = models.AutoField(primary_key=True, default=None)
+    categoria_id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, unique=True)
     ativo = models.BooleanField(default=True)
 
@@ -15,6 +16,7 @@ class Categoria(BaseModel):
 
 class Produto(BaseModel):
     produto_id = models.AutoField(primary_key=True, default=None)
+    loja = models.ForeignKey(Loja, on_delete=models.CASCADE, related_name='produtos')
     nome = models.CharField(max_length=155)
     descricao = models.TextField(blank=True)
     codigo_barras = models.CharField(max_length=13, blank=True)
@@ -58,3 +60,6 @@ class PrecoProduto(BaseModel):
             self.preco_desconto = None
 
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.produto.nome} - R$ {self.preco_venda}"
