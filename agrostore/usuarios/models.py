@@ -25,12 +25,12 @@ class UsuarioManager(BaseUserManager):
         return self.create_user(cpf, email, password, **extra_fields)
 
 
-class Genero(BaseUserManager):
+class Genero(models.Model):
     id_genero = models.CharField(max_length=2, primary_key=True)
     genero = models.CharField(max_length=55, unique=True)
-    
+
     def __str__(self):
-        return self.id_genero
+        return self.genero
 
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
