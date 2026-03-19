@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'agrostore.produtos',
     'agrostore.carrinhos',
     'agrostore.pedidos',
+    'agrostore.favoritos',
 ]
 
 MIDDLEWARE = [
