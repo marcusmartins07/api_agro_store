@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/v1/produtos/', include('agrostore.produtos.urls')),
     path('api/v1/carrinhos/', include('agrostore.carrinhos.urls')),
     path('api/v1/pedidos/', include('agrostore.pedidos.urls')),
+    path('api/v1/favoritos/', include('agrostore.favoritos.urls')),
 ]
