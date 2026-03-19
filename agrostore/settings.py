@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'agrostore.usuarios',
     'agrostore.lojas',
     'agrostore.produtos',
+    'agrostore.carrinhos',
 ]
 
 MIDDLEWARE = [
